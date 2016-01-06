@@ -1,0 +1,6 @@
+exception 'PDOException' with message 'SQLSTATE[HY000] [2002] php_network_getaddresses: getaddrinfo failed: nodename nor servname provided, or not known' in /Users/sangeetasingh/Sites/facebook/Connection.php:14
+Stack trace:
+#0 /Users/sangeetasingh/Sites/facebook/Connection.php(14): PDO->__construct('mysql:host=  ; ...', '  ', '  ')
+#1 /Users/sangeetasingh/Sites/facebook/Post_persist.php(8): Connection->__construct()
+#2 /Users/sangeetasingh/Sites/facebook/post_class.php(217): Post_persist->__construct()
+#3 {main}
