@@ -10,19 +10,22 @@ class Post_persist
 	}
 
 	public function save(\Posts $post)
-	{
-		$STH = $this->con->prepare("INSERT INTO posts(post_id,user_id, time, texts,likes) value (:post_id,:user_id,:time, :texts,:likes)");
+	{ 
+		if($post->texts != "")
+		{
+		$STH = $this->con->prepare("INSERT INTO posts(post_id,user_id, time, texts) value (:post_id,:user_id,:time, :texts)");
 
-		$vars = array(':post_id' => $post->post_id,':user_id' =>  $post->user_id,':time' => $post->time, 'texts'=> $post->texts ,
-					 'likes'=> $post->likes); 
+		$vars = array(':post_id' => $post->post_id,':user_id' =>  $post->user_id,':time' => $post->time, 'texts'=> $post->texts); 
 		
 		$STH->execute($vars);
+	}
+	
 
 	}
 
 	public function getPostByUserId($id)
 	{ 
-		$STH = $this->con->prepare("SELECT post_id,texts,time,user_id,likes FROM posts WHERE user_id = :user_id ORDER BY time DESC");
+		$STH = $this->con->prepare("SELECT post_id,texts,time,user_id FROM posts WHERE user_id = :user_id ORDER BY time DESC");
 		
 		$vars = array(':user_id' => $id  );
 		
