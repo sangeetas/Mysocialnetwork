@@ -10,14 +10,15 @@ class CommentPersist
 	}
 
 	public function save(Comments $cmt)
-	{
+	{  
+		if($cmt->texts!= "")
+		{
 		$STH = $this->con->prepare("INSERT INTO comments(comm_id, user_id, post_id, timestmps, texts) value (:comm_id, :user_id, :post_id, :time, :texts)");
 		$varq = array(':comm_id' => $cmt->comm_id, ':user_id' => $cmt->user_id,':post_id' => $cmt->post_id,
 				 ':time' => $cmt->time , ':texts' => $cmt->texts );
-//$STH->setFetchMode(PDO::FETCH_OBJ);
-//$STH->execute((array)$new_post);
- 
+
 	$STH->execute($varq);
+}
 
 	}
 
