@@ -55,12 +55,12 @@ else
 	}
 }
 ?>
-
+<!--
 <!DOCTYPE html>
 <html>
 <head></head>
 <body>
-<form action = "<?= $_SERVER["PHP_SELF"] ?>" method="post">
+<form action = "<?=// $_SERVER["PHP_SELF"] ?>" method="post">
 	<table>
 <tr>
 <td>Username:</td>
@@ -74,7 +74,7 @@ else
 <input name = "pass" type="password">
 </td>
 </tr>
-<p><?php echo $message; ?>
+<p><?//php echo $message; ?>
 <td></td>
 <td><input type="submit" value="Log In"></td>
 <tr>
@@ -83,4 +83,4 @@ else
 	</table>
 </form>
 </body>
-</html>
+</html> -->
