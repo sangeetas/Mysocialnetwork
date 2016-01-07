@@ -16,17 +16,6 @@ $path = rtrim(dirname($_SERVER["PHP_SELF"]), "/\\");
 //$GLOBALS['path'] = rtrim(dirname($_SERVER["PHP_SELF"]), "/\\");
 date_default_timezone_set('Asia/Kolkata');
 
-
-
-function connection()
-{ $config = parse_ini_file('/Users/sangeetasingh/config.ini'); 
-	$host="localhost";
-	$dbname = "facebook";
-    $DBH = new PDO("mysql:host=$host;dbname=$dbname", $config['username'], $config['password']);
-$DBH->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
-return $DBH;
-} 
-
 //redirecting to the searched person's page
 if(isset($_POST['searchKey']))
 { try {
@@ -40,10 +29,7 @@ foreach($rslt2 as $row3)
 //{
   $suid = $row3['id'];
 }
-				
-			
-			//$host = $_SERVER["HTTP_HOST"];
-			//$path = rtrim(dirname($_SERVER["PHP_SELF"]), "/\\");	
+	
 			$searchKey = NULL;
 			if($suid)
 			{$_SESSION['curruser']  =  $suid;
@@ -68,7 +54,7 @@ $user = print $_SESSION["user"];
 try {
 
 //inserting data into the table using an array
-	$tme = date( "Y-m-d H:i");
+	$tme = date( "Y-m-d h:i:s");
 $post = new Posts(NULL, $_SESSION["curruser"], $tme , $_POST['status'], 0 );
 $ps = new Post_persist();
 $ps->save($post); 
@@ -109,9 +95,7 @@ catch(PDOException $e)
 <title>Home</title>
 </head>
 <body>
-	<section>
-	<td><input type="submit" value="Home" onclick="redirect(); return false;"></td>
-	</section>
+	<br><br>
 	<form method="post" onsubmit="http://$host$path/post_class.php">
 <tr>
 <td>Search</td>
@@ -125,19 +109,19 @@ catch(PDOException $e)
 <td><input type="submit" value="search"></td>
 <br><br>
 </form> 
+	<section>
+	<td><input type="submit" value="Go to your Wall" onclick="redirect(); return false;"></td>
+	</section>
 <? if($_SESSION['curruser']==$_SESSION['userid']) {?>
 	<form action = "<?= $_SERVER["PHP_SELF"] ?>" method="post">
 <h1>Home</h1>
 <h3>
-
-You are logged in, <?= htmlspecialchars($_SESSION['curruser']) ?>!
+You are logged in!
 <br>
 <a href="logout.php">log out</a>
-<?}?>
 </h3>
 <br>
 <b>Your Wall</b>
-<br><br>
 <table>
 <tr>
 <td>What's on you mind?</td>
@@ -148,22 +132,19 @@ You are logged in, <?= htmlspecialchars($_SESSION['curruser']) ?>!
 <input name="status" type="text">
 </td>
 </tr>
-<td></td>
 <td><input type="submit" value="Post"></td>
 <br><br>
-<br>
 <? }
+ }
  else {?>
 You are not logged in! 
 <br>
-<a href = "login.php">Login</a>
+<a href = "index.html">Login</a>
 <?}?>
 <!-- iterate over posts -->
 <tr>
 <td> 
 <? 
-
-$DBH = connection();
 
 $ps1 = new Post_persist();
 $reslt = $ps1->getPostByUserId($_SESSION['curruser']); 
