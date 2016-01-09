@@ -47,6 +47,19 @@ class LikesPersist
 
 	}
 
+	public function isLikedByUser($eid,$type,$uid)
+	{ 
+		
+		$STH = $this->con->prepare("SELECT id,eid,eType,uid FROM post_likes WHERE uid = :user_id AND eid = :eid AND eType= :etype");
+		
+		$vars = array(':user_id' => $uid,':eid' => $eid , ':etype' => $type);
+		
+		$STH->execute($vars);
+
+		 return $STH->fetchColumn(0);
+
+	}
+
 }
 
 
