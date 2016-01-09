@@ -84,7 +84,7 @@ catch(PDOException $e)
 }
 ?>
 <? if(isset($_SESSION['authenticated'])) {?>
-<script type="text/javascript" language="javascript" src="http://localhost/~sangeetasingh/facebook/actions.js"></script>
+<script type="text/javascript" language="javascript" src="actions.js"></script>
 <html>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" type="text/css" href="w3.css">
@@ -172,8 +172,14 @@ $likes = $pls->getTotalLikesId($row1['post_id'],"p");
 	<p>Post:<? print($row1['post_id'])?></p>
 	<? $id1 = $row1['post_id']."p"."b";
 		$idb1 = $row1['post_id']."p";
+		$lp = new LikesPersist();
+		$count = $lp->isLikedByUser($row1['post_id'],"p",$_SESSION['userid']);
+		if($count != 0)
+		$value = "Unlike";
+	else
+		$value = "Like";
 		 ?>
-	<input type="button"  id = "<?print $id1?>" value="Like" onclick= " 
+	<input type="button"  id = "<?print $id1?>" value=<?echo $value?> onclick= " 
 		 updateLike( '<?print $row1['post_id']?>','p'); "/>
 <br/>
 </section>
@@ -193,7 +199,7 @@ $likes = $pls->getTotalLikesId($row1['post_id'],"p");
 	 		//$sql2 = sprintf();
 
 			$cs3 = new CommentPersist();
-			$result2 = $cs3->getPostByUserId($row1['post_id']);
+			$result2 = $cs3->getCommentByPostId($row1['post_id']);
 
 			foreach($result2 as $row2 )
 				{ 
@@ -206,12 +212,19 @@ $likes = $pls->getTotalLikesId($row1['post_id'],"p");
 	 		<div class="likes">
 			<section class="w3-container w3-border"> 
 	
-	<? $id1 = $row1['post_id']."c"."b";
-		$idb1 = $row1['post_id']."c";
+	<? $id1 = $row2['comm_id']."c"."b";
+		$idb1 = $row2['comm_id']."c";
+		$lp = new LikesPersist();
+		$count = $lp->isLikedByUser($row2['comm_id'],"c",$_SESSION['userid']);
+		$likesc = $pls->getTotalLikesId($row2['comm_id'],"c");
+		if($count != 0)
+		$val = "Unlike";
+	else
+		$val = "Like";
 		 ?>
-	<input type="button"  id = "<?print $id1?>" value="Like" onclick= " 
-		 updateLike( '<?print $row1['post_id']?>','c'); "/>
-<label id="<?echo $idb1?>"><? echo $likes?> people like it!</label> <br/>
+	<input type="button"  id = "<?print $id1?>" value= <?echo $val?> onclick= " 
+		 updateLike( '<?print $row2['comm_id']?>','c'); "/>
+<label id="<?echo $idb1?>"><? echo $likesc?> people like it!</label><br/>
 </section>
 			</div>
 	 		<?}
