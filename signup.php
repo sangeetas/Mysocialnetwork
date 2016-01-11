@@ -29,8 +29,6 @@ elseif (strlen( $_POST['email']) > 40 || strlen($_POST['email']) < 4)
 {
     $message = 'Incorrect Length for email';
 }
-
-
 else
 {
     /*** if we are here the data is valid and we can insert it into database ***/
@@ -51,17 +49,17 @@ else
     catch(Exception $e)
     {
         /*** check if the username already exists ***/
-        echo $e->getMessage();
-        /*
+        //echo $e->getMessage();
+        
         if( $e->getCode() == 23000)
         {
-            $message = 'Username already exists';
+            $message = 'Email already exists';
         }
         else
         {
             /*** if we are here, something has gone wrong with the database ***/
-          /*  $message = 'We are unable to process your request. Please try again later"';
-        }*/
+           $message = 'We are unable to process your request. Please try again later"';
+        }
     }
 }
 ?>
