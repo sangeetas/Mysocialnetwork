@@ -1,6 +1,5 @@
 <?
 session_start();
-include 'Myconstants.php';
 include 'Posts.php';
 include 'Comments.php';
 include 'CommentPersist.php';
