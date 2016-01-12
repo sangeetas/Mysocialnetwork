@@ -85,7 +85,7 @@ else
 <td><input value="Sign up" type="submit"></input></td>
 <p><?php echo $message; ?>
 	<tr>
-	<td><a href = "login.php">Login</a></td>
+	<td><a href = "index.html">Login</a></td>
 </tr>
 </table>
 </body>
