@@ -164,7 +164,6 @@ foreach($reslt as $row1)
 		?>
 
 	<div class="likes">
-		<section class="w3-container w3-border"> 
 			<p>Post:<? print($row1['post_id'])?></p>
 			<? $id1 = $row1['post_id']."p"."b";
 			$idb1 = $row1['post_id']."p";
@@ -177,11 +176,8 @@ foreach($reslt as $row1)
 		 	?>
 			<input type="button"  id = "<?print $id1?>" value=<?echo $value?> onclick= " 
 		 	updateLike( '<?print $row1['post_id']?>','p'); "/>
+		 	<label id="<?echo $idb1?>"><? echo $likes?> people like it!</label> <br/>
 			<br/>
-		</section>
-		<section class="w3-container w3-border"> 
-			<div id="<?echo $idb1?>"><? echo $likes?> people like it!</div> <br/>
-		</section>
 	</div>
 	<section class="w3-container w3-border">
 		<form action = "<?= $_SERVER["PHP_SELF"] ?>" method="post">
@@ -203,7 +199,6 @@ foreach($reslt as $row1)
 			<?
 	 		printf("%s <br/></section>", $row2['texts']); ?>
 	 			<div class="likes">
-					<section class="w3-container w3-border"> 
 						<? $id1 = $row2['comm_id']."c"."b";
 						$idb1 = $row2['comm_id']."c";
 						$lp = new LikesPersist();
@@ -217,8 +212,9 @@ foreach($reslt as $row1)
 						<input type="button"  id = "<?print $id1?>" value= <?echo $val?> onclick= " 
 		 				updateLike( '<?print $row2['comm_id']?>','c'); "/>
 						<label id="<?echo $idb1?>"><? echo $likesc?> people like it!</label><br/>
-					</section>
 				</div>
+		</section>
+				
 	 <?}
 	 		printf(" <br/><br/>");
 	 
